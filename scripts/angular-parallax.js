@@ -11,23 +11,19 @@ angular.module('angular-parallax', [
     },
     link: function ($scope, elem, attrs) {
 
-      var started = false;
-
       var setPosition = function () {
 
         if (!$scope.parallaxHorizontalOffset) $scope.parallaxHorizontalOffset = 0;
-        if (!$scope.parallaxVerticalOffset) $scope.parallaxVerticalOffset = -12.8;
 
         var position = (angular.element('.page-scroll-content').offset().top * -1) + 112;
 
 
         var calcValY = position * ($scope.parallaxRatio ? $scope.parallaxRatio : 1.1);
 
-        if (calcValY < 20 && !started) {
+        if (calcValY < 12) {
           calcValY = 0;
-          started = true;
         }
-        else if (calcValY <= $window.innerHeight) {
+        if (calcValY <= $window.innerHeight) {
 
           var topVal = (calcValY > $scope.parallaxVerticalOffset ? $scope.parallaxVerticalOffset : calcValY);
           elem.css('transform', 'translate(' + $scope.parallaxHorizontalOffset + 'px, ' + topVal + 'px)');
